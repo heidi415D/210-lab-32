@@ -37,26 +37,40 @@ int main() {
         cout << "    ";
         c.print();
     }
-    int timeStep = 2;
+
+    int timeStep = 1;
 
     // run simulation until line is empty
     while (!line.empty()) {
-        int r = rand() % 55
+        
+        int r = rand() % 55;
 
         if (r < 55) {
-            cout << "\nTime: " << timeStep << "Operation: Car paid: ";
+            cout << "\nTime: " << timeStep << " Operation: Car paid: ";
             line.front().print();
             line.pop_front();
         }
-        else {
+        else { // 45% chance a new car arrives
             Car newCar;
-            cout << "\nTime: " << timeStep << "Operation: Joined lane:";
+            cout << "\nTime: " << timeStep << " Operation: Joined lane: ";
             newCar.print();
             line.push_back(newCar);
         }
+
+        // print queue after operation
+        cout << "Queue:\n";
+        if (line.empty()) {
+            cout << "    Empty\n";
+        }
+        else {
+            for (Car &c : line) {
+                cout << "    ";
+                c.print();
+            }
+        }
+
+        timeStep++;
     }
 
-      
     return 0;
- }
-
+}
