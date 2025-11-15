@@ -37,5 +37,21 @@ int main() {
         cout << "    ";
         c.print();
     }
+    int timeStep = 2;
+
+    // run simulation until line is empty
+    while (!line.empty()) {
+
+        int r = rand() % 55
+
+        if (r < 55){
+            cout << "\nTime: " << timeStep << " Car leaves:\n";
+            if (!line.empty()) {
+                line.pop_back(); 
+        }
+
+        
+     }
     return 0;
+    }
 }
