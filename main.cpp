@@ -41,17 +41,22 @@ int main() {
 
     // run simulation until line is empty
     while (!line.empty()) {
-
         int r = rand() % 55
 
-        if (r < 55){
-            cout << "\nTime: " << timeStep << " Car leaves:\n";
-            if (!line.empty()) {
-                line.pop_back(); 
+        if (r < 55) {
+            cout << "\nTime: " << timeStep << "Operation: Car paid: ";
+            line.front().print();
+            line.pop_front();
         }
-
-        
-     }
-    return 0;
+        else {
+            Car newCar;
+            cout << "\nTime: " << timeStep << "Operation: Joined lane:";
+            newCar.print();
+            line.push_back(newCar);
+        }
     }
-}
+
+      
+    return 0;
+ }
+
