@@ -43,7 +43,7 @@ int main() {
     // run simulation until line is empty
     while (!line.empty()) {
         
-        int r = rand() % 55;
+        int r = rand() % 100; 
 
         if (r < 55) {
             cout << "\nTime: " << timeStep << " Operation: Car paid: ";
