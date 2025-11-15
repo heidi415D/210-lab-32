@@ -17,22 +17,8 @@ int main() {
         line.push_back(Car()); // add to back of line
     }
 
-    cout << "Initial line of cars:\n";
-    for (Car &c : line) {
-        cout << "    ";
-        c.print();
-    }
-    
-    // deque operations
-    if (!line.empty()) {
-        cout << "\n tetsing pop_front(): removing first car:\n";
-        line.pop_front();
-    }
-
-    cout << "testing push_back(): adding new car...\n";
-    line.push_back(Car());
-
-    cout << "\nQueue after testing operations:\n";
+    // queue display
+    cout << "Initial queue:\n";
     for (Car &c : line) {
         cout << "    ";
         c.print();
