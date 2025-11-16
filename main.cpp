@@ -24,6 +24,7 @@ int main() {
         cout << "Lane " << (i+1) << " has " << lanes[i].size() << " car(s):\n";
     }
 
+    // milestone 2
 
     // add initial cars 
     for (int i = 0; i < INITIAL; i++) {
