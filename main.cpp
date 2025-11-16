@@ -11,20 +11,18 @@ const int LANES = 4;
 int main() {
 
     srand(time(0)); // seed random number generator
-    deque<Car> lanes[LANES]; // toll booth lanes
+    deque<Car> lanes[LANES]; // creates lanes, each is a deque<Car>
 
-    // test lane structure
-    lanes[0].push_back(Car());
-    lanes[1].push_back(Car());
-    lanes[2].push_back(Car());
-    lanes[3].push_back(Car());
-
-    cout << "Testing lanes:\n";
     for (int i = 0; i < LANES; i++) {
-        cout << "Lane " << (i+1) << " has " << lanes[i].size() << " car(s):\n";
+        for(int j = 0; j < 2; j++) {
+            lanes[i].push_back(Car());
+        }
     }
 
-    // milestone 2
+    cout << "Initial lanes:\n";
+    for (int i = 0; i < LANES; i++) {
+        cout << "Lane " << (i + 1) << ":\n";
+      
 
     // add initial cars 
     for (int i = 0; i < INITIAL; i++) {
