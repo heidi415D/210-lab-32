@@ -54,31 +54,34 @@ int main() {
                     cout << "Lane: " << i + 1 << " Paid: ";
                     lanes[i].front().print();
                     lanes[i].pop_front();
-                } else {
-                    Car newCar;
-                    cout << "Lane: " << i + 1 << " Joined: ";
-                    newCar.print();
-                    lanes[i].push_back(newCar);
-
-                    int s = rand() % 100;
-                    if (s < 15 && !lanes[i].empty()) {
-
-                        int target = rand() % LANES;
-
-                        while (target == i) {
-                            target = rand() % LANES;
-                        }
-                        
-                        car temp = lanes[i].back();
-                        lanes[i].pop_back();
-
-                        cout << "Lane: " << i + 1 << " Switched to Lane: " << target + 1 << " Car: ";
-                        temp.print();
-
-                        lanes[target].push_back(temp);
-                    }
+                } 
+                else {
+                Car newCar;
+                cout << "Lane: " << i + 1 << " Joined: ";
+                 newCar.print();
+                lanes[i].push_back(newCar);
                 }
-                
+
+            // 15% chance to switch 
+            int s = rand() % 100;
+
+            if (s < 15 && !lanes[i].empty()) {
+
+            int target = rand() % LANES;
+                while (target == i) {
+                target = rand() % LANES;
+                }
+
+            Car mover = lanes[i].back();
+             lanes[i].pop_back();
+
+            cout << "Lane: " << i + 1 << " Switched: ";
+             mover.print();
+             cout << "    --> moved to lane " << target + 1 << "\n";
+
+                lanes[target].push_back(mover);
+                }
+
             }
         }
     
