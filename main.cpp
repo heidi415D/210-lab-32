@@ -32,7 +32,7 @@ int main() {
 
         cout << "\nTime: " << t << "\n";
        
-        for (int i = 0; i <= LANES; i++) { // operations for each lane
+        for (int i = 0; i < LANES; i++) { // operations for each lane
         
             if (lanes[i].empty()) { // empty lane - 50/50
                 int r = rand() % 100;
@@ -63,7 +63,21 @@ int main() {
                 
             }
         }
-    }
     
         // print queues for all lanes
+        for (int i = 0; i < LANES; i++) {
+            cout << "Lane " << i + 1 << " Queue:\n";
+            if (lanes[i].empty()) {
+                cout << "    empty\n";
+            }
+            else {
+                for (Car &c : lanes[i]) {
+                    cout << "    ";
+                    c.print();
+                 }
+            }
+        }
+    }
+    
+       return 0;
 }
