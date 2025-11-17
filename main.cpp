@@ -65,6 +65,10 @@ int main() {
 
                         int target = rand() % LANES;
 
+                        while (target == i) {
+                            target = rand() % LANES;
+                        }
+                        
                         car temp = lanes[i].back();
                         lanes[i].pop_back();
 
