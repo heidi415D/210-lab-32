@@ -6,57 +6,103 @@
 using namespace std;
 
 const int INITIAL = 2;
+const int LANES = 4;
+
+// probability constants
+const int PAY_PROB = 46;
+const int JOIN_PROB = 39;
+const int SWITCH_PROB = 15;
 
 int main() {
 
     srand(time(0)); // seed random number generator
-    deque<Car> line; // toll booth line
+    deque<Car> lanes[LANES]; // creates lanes, each is a deque<Car>
 
-    // add initial cars 
-    for (int i = 0; i < INITIAL; i++) {
-        line.push_back(Car()); // add to back of line
+    for (int i = 0; i < LANES; i++) { // populate lanes
+        for(int j = 0; j < 2; j++) {
+            lanes[i].push_back(Car());
+        }
     }
 
-    // queue display
-    cout << "Initial queue:\n";
-    for (Car &c : line) {
-        cout << "    ";
-        c.print();
+    cout << "Initial lanes:\n"; // print initial lanes
+    for (int i = 0; i < LANES; i++) {
+        cout << "Lane " << (i + 1) << ":\n";
+        for (Car &c : lanes[i]) {
+            cout << "    ";
+            c.print();
+     }
     }
 
-    int timeStep = 1;
+    for (int t = 1; t <= 20; t++) { // start time loop
 
-    // run simulation until line is empty
-    while (!line.empty()) {
+        cout << "\nTime: " << t << "\n";
+       
+        for (int i = 0; i < LANES; i++) { // operations for each lane
         
-        int r = rand() % 100; 
+            if (lanes[i].empty()) { // empty lane - 50/50
+                int r = rand() % 100;
 
-        if (r < 55) {
-            cout << "\nTime: " << timeStep << " Operation: Car paid: ";
-            line.front().print();
-            line.pop_front();
-        }
-        else { // 45% chance a new car arrives
-            Car newCar;
-            cout << "\nTime: " << timeStep << " Operation: Joined lane: ";
-            newCar.print();
-            line.push_back(newCar);
-        }
+                  if (r < 50) {
+                Car newCar;
+                cout << "Lane: " << i + 1 << " Joined: ";
+                newCar.print();
+                lanes[i].push_back(newCar); 
+             } 
+            else {
+                cout << "Lane: " << i + 1 << " No action\n";
+            }
+      }
+            else { // non-empty lane - 46% pay, 39% join, 15% switch
+                int r = rand() % 100;
 
-        // print queue after operation
-        cout << "Queue:\n";
-        if (line.empty()) {
-            cout << "    Empty\n";
-        }
-        else {
-            for (Car &c : line) {
-                cout << "    ";
-                c.print();
+                if (r < PAY_PROB) { // 46% chance to pay
+                    cout << "Lane: " << i + 1 << " Paid: ";
+                    lanes[i].front().print();
+                    lanes[i].pop_front();
+                } 
+                else if (r < PAY_PROB + JOIN_PROB) { // 39% chance to join
+                Car newCar;
+                cout << "Lane: " << i + 1 << " Joined: ";
+                 newCar.print();
+                lanes[i].push_back(newCar);
+                }
+                else {     // 15% chance to switch 
+                    if (!lanes[i].empty()) {
+                        
+
+            int target = rand() % LANES;
+                while (target == i) {
+                target = rand() % LANES;
+                }
+
+            Car mover = lanes[i].back();
+             lanes[i].pop_back();
+
+            cout << "Lane: " << i + 1 << " Switched: ";
+             mover.print();
+             cout << "    --> moved to lane " << target + 1 << "\n";
+
+                lanes[target].push_back(mover);
+                    }
+                }       
+
             }
         }
-
-        timeStep++;
+    
+        // print queues for all lanes
+        for (int i = 0; i < LANES; i++) {
+            cout << "Lane " << i + 1 << " Queue:\n";
+            if (lanes[i].empty()) {
+                cout << "    empty\n";
+            }
+            else {
+                for (Car &c : lanes[i]) {
+                    cout << "    ";
+                    c.print();
+                 }
+            }
+        }
     }
-
-    return 0;
+    
+       return 0;
 }
