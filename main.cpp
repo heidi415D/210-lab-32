@@ -59,6 +59,20 @@ int main() {
                     cout << "Lane: " << i + 1 << " Joined: ";
                     newCar.print();
                     lanes[i].push_back(newCar);
+
+                    int s = rand() % 100;
+                    if (s < 15 && !lanes[i].empty()) {
+
+                        int target = rand() % LANES;
+
+                        car temp = lanes[i].back();
+                        lanes[i].pop_back();
+
+                        cout << "Lane: " << i + 1 << " Switched to Lane: " << target + 1 << " Car: ";
+                        temp.print();
+
+                        lanes[target].push_back(temp);
+                    }
                 }
                 
             }
