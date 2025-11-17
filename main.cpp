@@ -29,6 +29,7 @@ int main() {
     }
 
     for (int t = 1; t <= 20; t++) {
+        
         cout << "\nTime: " << t << "\n";
        
         for (int i = 0; i <= LANES; i++) { // operations for each lane
@@ -43,7 +44,11 @@ int main() {
                 lanes[i].pop_front();
             }
             else {
-                Car
+                Car newCar;
+                cout << "Lane: " << i + 1 << " Joined: ";
+                newCar.print();
+                lanes[i].push_back(newCar);
+                lanes[i].push_back(newCar);
             }
         }
     }
