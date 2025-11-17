@@ -8,6 +8,11 @@ using namespace std;
 const int INITIAL = 2;
 const int LANES = 4;
 
+// probability constants
+const int PAY_PROB = 46;
+const int JOIN_PROB = 39;
+const int SWITCH_PROB = 15;
+
 int main() {
 
     srand(time(0)); // seed random number generator
@@ -47,25 +52,23 @@ int main() {
                 cout << "Lane: " << i + 1 << " No action\n";
             }
       }
-            else { // non-empty lane - 50% paid, 50% joined
+            else { // non-empty lane - 46% pay, 39% join, 15% switch
                 int r = rand() % 100;
 
-                if (r < 50) {
+                if (r < PAY_PROB) { // 46% chance to pay
                     cout << "Lane: " << i + 1 << " Paid: ";
                     lanes[i].front().print();
                     lanes[i].pop_front();
                 } 
-                else {
+                else if (r < PAY_PROB + JOIN_PROB) { // 39% chance to join
                 Car newCar;
                 cout << "Lane: " << i + 1 << " Joined: ";
                  newCar.print();
                 lanes[i].push_back(newCar);
                 }
-
-            // 15% chance to switch 
-            int s = rand() % 100;
-
-            if (s < 15 && !lanes[i].empty()) {
+                else {     // 15% chance to switch 
+                    if (!lanes[i].empty()) {
+                        
 
             int target = rand() % LANES;
                 while (target == i) {
@@ -80,7 +83,8 @@ int main() {
              cout << "    --> moved to lane " << target + 1 << "\n";
 
                 lanes[target].push_back(mover);
-                }
+                    }
+                }       
 
             }
         }
