@@ -27,5 +27,26 @@ int main() {
             c.print();
      }
     }
+
+    for (int t = 1; t <= 20; t++) {
+        cout << "\nTime: " << t << "\n";
+       
+        for (int i = 0; i <= LANES; i++) { // operations for each lane
+        
+            cout << "Time: " << t << "\n";
+
+            int r = rand() % 100;
+
+            if (r < 50) {
+                cout << "Lane: " << i + 1 << "PaidL ";
+                lanes[i].front().print();
+                lanes[i].pop_front();
+            }
+            else {
+                Car
+            }
+        }
+    }
+
     return 0;
 }
